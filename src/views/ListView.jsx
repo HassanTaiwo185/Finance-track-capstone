@@ -16,6 +16,17 @@ export default function ListView() {
     const [type, setType]         = useState('all')
     const [sortBy, setSortBy]     = useState('date-desc')
 
+    // check if any filter is active
+    const filtersActive = query !== '' || category !== 'all' || type !== 'all'
+
+    // reset all filters to default
+    function clearFilters() {
+        setQuery('')
+        setCategory('all')
+        setType('all')
+        setSortBy('date-desc')
+    }
+
     // hide success message after 10 seconds
     useEffect(() => {
         if (!showSuccess) return
@@ -44,7 +55,7 @@ export default function ListView() {
         <div>
             {/* success feedback */}
             {showSuccess && (
-                <div className="alert alert-success">Transaction saved successfully</div>
+                <div className="alert alert-success" role="status">Transaction saved successfully</div>
             )}
 
             {/* search and filters */}
@@ -82,7 +93,14 @@ export default function ListView() {
             )}
 
             {transactions.length > 0 && sortedTransactions.length === 0 && (
-                <div className="alert alert-secondary">No results found</div>
+                <div className="alert alert-secondary d-flex justify-content-between align-items-center">
+                    <span>No results found</span>
+                    {filtersActive && (
+                        <button className="btn btn-sm btn-outline-secondary" onClick={clearFilters}>
+                            Clear filters
+                        </button>
+                    )}
+                </div>
             )}
 
             {/* list */}

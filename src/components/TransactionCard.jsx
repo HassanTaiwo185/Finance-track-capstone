@@ -14,7 +14,7 @@ export default function TransactionCard({ transaction, onView, onEdit, onDelete 
             <div className="card-footer d-flex justify-content-end gap-2">
                 <button className="btn btn-secondary btn-sm" onClick={() => onView()}>View</button>
                 <button className="btn btn-primary btn-sm" onClick={() => onEdit()}>Edit</button>
-                <button className="btn btn-danger btn-sm" onClick={() => onDelete()}>Delete</button>
+               <button className="btn btn-danger btn-sm" onClick={() => { if (window.confirm('Delete this transaction?')) onDelete() }}>Delete</button>
             </div>
         </div>
     )

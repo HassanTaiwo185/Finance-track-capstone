@@ -10,7 +10,17 @@ export default function NewEditForm() {
     const { transactions, addTransaction, updateTransaction } = useFinance()
 
     // if editing, find existing transaction
-    const existing = id ? (transactions.find(t => t.id === id) ?? {}) : {}
+    const existing = id ? (transactions.find(t => t.id === id) ?? null) : null
+
+    // if editing but id not found, show not found message
+    if (id && !existing) {
+        return (
+            <div className="container py-4">
+                <div className="alert alert-danger">Transaction not found.</div>
+                <button className="btn btn-sm btn-outline-secondary" onClick={() => navigate('/list')}>Back to transactions</button>
+            </div>
+        )
+    }
 
     // handle form submission (edit or add)
     function onSubmit(values) {

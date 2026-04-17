@@ -17,8 +17,8 @@ function validate(values) {
 
     if (!values.amount) {
         errors.amount = 'Amount is required'
-    } else if (isNaN(values.amount) || Number(values.amount) < 0) {
-        errors.amount = 'Amount must be a valid positive number ≥ 0.00'
+    } else if (isNaN(values.amount) || Number(values.amount) <= 0) {
+        errors.amount = 'Amount must be a positive number greater than 0'
     }
 
     if (!values.category) errors.category = 'Category is required'
