@@ -13,7 +13,7 @@ export default function DetailView() {
         return (
             <>
                 <div className="alert alert-danger">Transaction not found</div>
-                <Link className="btn btn-sm btn-outline-secondary" to="/list">← Back to transactions</Link>
+                <Link className="btn btn-sm btn-outline-secondary" to="/list">Back to transactions</Link>
             </>
         )
     }
@@ -21,7 +21,7 @@ export default function DetailView() {
     return (
         <div>
             <div className="mb-3">
-                <Link className="btn btn-sm btn-outline-secondary" to="/list">← Back to transactions</Link>
+                <Link className="btn btn-sm btn-outline-secondary" to="/list">Back to transactions</Link>
             </div>
             <div className="card">
                 <div className="card-body">
@@ -29,6 +29,7 @@ export default function DetailView() {
                     <h6 className="card-subtitle mb-2 text-muted">{transaction.category}</h6>
                     <p><strong>Type:</strong> {transaction.type}</p>
                     <p><strong>Amount:</strong> <span className={transaction.type === 'income' ? 'text-success' : 'text-danger'}>{transaction.type === 'income' ? '+' : '-'}${transaction.amount.toFixed(2)}</span></p>
+                    <p><strong>Tax:</strong> ${(transaction.tax || 0).toFixed(2)}</p>
                     <p><strong>Date:</strong> {transaction.date}</p>
                     <p>{transaction.note || 'No notes'}</p>
                 </div>

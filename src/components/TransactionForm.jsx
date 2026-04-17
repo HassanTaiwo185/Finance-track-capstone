@@ -4,6 +4,7 @@ const initialValues = {
     title:    '',
     type:     'expense',
     amount:   '',
+    tax:      '',
     category: '',
     date:     new Date().toISOString().slice(0, 10),
     note:     '',
@@ -19,6 +20,10 @@ function validate(values) {
         errors.amount = 'Amount is required'
     } else if (isNaN(values.amount) || Number(values.amount) <= 0) {
         errors.amount = 'Amount must be a positive number greater than 0'
+    }
+
+    if (values.tax !== '' && (isNaN(values.tax) || Number(values.tax) < 0)) {
+        errors.tax = 'Tax must be a valid number ≥ 0'
     }
 
     if (!values.category) errors.category = 'Category is required'
@@ -68,6 +73,14 @@ export default function TransactionForm({ onSubmit, onCancel, defaultValues }) {
                 <input type="text" name="amount" value={values.amount} onChange={handleChange} onBlur={handleBlur} min="0" step="0.01" className={`form-control ${touched.amount && errors.amount ? 'is-invalid' : ''}`} />
                 <div className="form-text">Format: 12.34</div>
                 {touched.amount && errors.amount && <div className="invalid-feedback">{errors.amount}</div>}
+            </div>
+
+           {/* Tax */}
+            <div className="col-md-6">
+                <label className="form-label">Tax (CAD) <span className="text-muted fw-normal">(optional)</span></label>
+                <input type="text" name="tax" value={values.tax} onChange={handleChange} onBlur={handleBlur} step="0.01" className={`form-control ${touched.tax && errors.tax ? 'is-invalid' : ''}`} />
+                <div className="form-text">Format: 1.23</div>
+                {touched.tax && errors.tax && <div className="invalid-feedback">{errors.tax}</div>}
             </div>
 
 

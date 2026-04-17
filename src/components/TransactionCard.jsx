@@ -7,6 +7,9 @@ export default function TransactionCard({ transaction, onView, onEdit, onDelete 
                 <div className={`fw-bold ${transaction.type === 'income' ? 'text-success' : 'text-danger'}`}>
                     {transaction.type === 'income' ? '+' : '-'}${transaction.amount.toFixed(2)}
                 </div>
+                {transaction.tax > 0 && (
+                    <div className="text-muted">Tax: ${transaction.tax.toFixed(2)}</div>
+                )}
                 <div className="text-muted">{transaction.type}</div>
                 <div className="text-muted">{transaction.date}</div>
                 {transaction.note && <div className="text-muted">{transaction.note}</div>}
