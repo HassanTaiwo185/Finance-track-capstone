@@ -31,7 +31,7 @@ export default function DetailView() {
                     <p><strong>Amount:</strong> <span className={transaction.type === 'income' ? 'text-success' : 'text-danger'}>{transaction.type === 'income' ? '+' : '-'}${transaction.amount.toFixed(2)}</span></p>
                     <p><strong>Tax:</strong> ${(transaction.tax || 0).toFixed(2)}</p>
                     <p><strong>Date:</strong> {transaction.date}</p>
-                    <p>{transaction.note || 'No notes'}</p>
+                    <p><strong>Note:</strong> {transaction.note || 'No notes'}</p>
                 </div>
                 <div className="card-footer">
                     <Link className="btn btn-sm btn-primary" to={`/edit/${transaction.id}`}>Edit</Link>
